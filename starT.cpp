@@ -13,9 +13,21 @@ void runTests(void);
 
 string starT(int width, int height)
 {
-  string result = "";
-  result = "stub"; // TODO: remove this line, replace with correct code
-  return result;
+  string res{""};
+
+  if (width < 3 || height < 2 || width % 2 == 0)
+    return res;
+
+  int mid = (width / 2);
+
+  res += string(width, '*') + "\n";
+
+  for (int i = 0; i < height -1; ++i) { 
+    std::string space = std::string(mid, ' ');
+    res += space + "*" + space + "\n";
+  }
+
+  return res;
 }
 
 // Test-Driven Development; check expected results against actual
@@ -79,15 +91,25 @@ int main(int argc, char *argv[])
 
   // TODO: Add check for parameters
   // and code to print usage message
+  if (argc != 3)
+  {
+    cerr << "Usage: " << argv[0] << " width height" << endl;
+    exit(1);
+  }
+
+  int width = stoi(argv[1]);
+  int height = stoi(argv[2]);
 
   // TODO: Add code to get width and height from command line args
   // code that checks if they are both -1; if so, call runTests()
   // then exit.
+  if (width == -1 && height == -1)
+  {
+    runTests();
+    exit(0);
+  }
 
-  runTests();
-
-  // TODO: Add code that calls the starT function and prints
-  // the result on cout (without an extra newline)
+  cout << starT(width, height) << endl;
 
   return 0;
 }

@@ -14,9 +14,19 @@ void runTests(void);
 
 string starC(int width, int height)
 {
-  string result = "";
-  result = "stub"; // TODO: remove this line, replace with correct code
-  return result;
+  string res{""};
+
+  if (width < 2 || height < 3)
+    return res;
+  
+  res += string(width, '*') + "\n";
+
+  for (int i = 0; i < height - 2; ++i) {
+    res += "*" + string(width - 1, ' ') + "\n";
+  }
+
+  res += string(width, '*') + "\n";
+  return res;
 }
 
 // Test-Driven Development; check expected results against actual
@@ -76,17 +86,21 @@ void assertEquals(string expected, string actual, string message = "")
 int main(int argc, char *argv[])
 {
 
-  // TODO: Add check for parameters
-  // and code to print usage message
+  if (argc != 3)
+  {
+    cerr << "Usage: " << argv[0] << " width height" << endl;
+    exit(1);
+  }
 
-  // TODO: Add code to get width and height from cmd line args
-  // code that checks if they are both -1; if so, call runTests()
-  // then exit.
+  int width = stoi(argv[1]);
+  int height = stoi(argv[2]);
 
-  runTests();
+  if (width == -1 && height == -1)
+  {
+    runTests();
+    exit(0);
+  }
 
-  // TODO: Add code that calls the starC function and prints
-  // the result on cout (without an extra newline)
-
+  cout << starC(width, height);
   return 0;
 }

@@ -11,7 +11,26 @@ void runTests(void);
 
 string starX(int width)
 {
-  return "stub";
+  string res{""};
+
+  if (width < 3 || width % 2 == 0)
+    return res;
+
+  int mid = (width / 2);
+
+  for (int i = 0; i < width; ++i) {
+    int space = abs(mid - i);
+
+    res += string(mid - space, ' ') + "*";
+
+    if (i != mid) {
+      res += string(2 * space - 1, ' ') + "*";
+    }
+
+    res += string(mid - space, ' ') + "\n";
+  }
+
+  return res;
 }
 
 // Test-Driven Development;
@@ -65,6 +84,22 @@ void assertEquals(string expected, string actual, string message = "")
 
 int main(int argc, char *argv[])
 {
+  if (argc != 2)
+  {
+    cerr << "Usage: " << argv[0] << " width" << endl;
+    exit(1);
+  }
+
+  int width = stoi(argv[1]);
+
+  if (width == -1)
+  {
+    runTests();
+    exit(0);
+  }
+
+  cout << starX(width) << endl;
+
   return 0;
 }
 
