@@ -109,7 +109,7 @@ int main(int argc, char *argv[])
     exit(0);
   }
 
-  cout << starT(width, height) << endl;
+  cout << starT(width, height);
 
   return 0;
 }
